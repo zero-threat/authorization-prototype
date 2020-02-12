@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import CardList from '@/components/CardList.vue'
 
 export default {
