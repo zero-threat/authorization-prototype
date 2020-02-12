@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './Home';
-import LogPage from './LogPage';
-import CardEditPage from './CardEditPage';
+import Home from './views/Home';
+import LogPage from './views/LogPage';
+import CardEditPage from './views/CardEditPage';
 
 Vue.use(VueRouter)
 
