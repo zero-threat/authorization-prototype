@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <Header />
     <router-view />
   </div>
@@ -13,5 +13,7 @@
 </script>
 
 <style lang="scss">
-
+  #app {
+    font-family: 'Montserrat', sans-serif;
+  }
 </style>

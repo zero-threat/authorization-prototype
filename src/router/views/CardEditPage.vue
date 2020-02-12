@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import CardEdit from '@/components/CardEdit/CardEdit';
+    import CardEdit from '../../components/CardEdit/CardEdit';
     export default {
         components: {
             CardEdit

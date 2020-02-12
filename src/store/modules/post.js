@@ -1,13 +1,9 @@
 export default {
     actions: {
         async fetchPosts({ commit }, page = 1) {
-            // try {
-                const res = await fetch(`http://localhost:3000/posts?_page=${page}&_limit=10`)
-                const posts = await res.json()
-                commit('updatePosts', posts)
-            // } catch (e) {
-            //     throw e
-            // }
+            const res = await fetch(`http://localhost:3000/posts?_page=${page}&_limit=10`)
+            const posts = await res.json()
+            commit('updatePosts', posts)
         }
     },
     mutations: {
@@ -18,7 +14,6 @@ export default {
         },
         createPosts(state, newPost) {
             state.posts = [newPost, ...state.posts];
-            console.log('state.posts :', state.posts);
         },
         updatePost(state, newData) {
             const selectedPostIndex = state.posts.findIndex(el => el.id === newData.id)

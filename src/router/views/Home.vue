@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <CardList />
-  </div>
+  <CardList />
 </template>
 
 <script>
-import CardList from '@/components/CardList/CardList'
+import CardList from '../../components/CardList/CardList'
 
 export default {
   name: 'Home',
