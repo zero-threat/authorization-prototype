@@ -4,6 +4,7 @@ export default {
             const res = await fetch(`http://localhost:3000/posts?_page=${page}&_limit=10`)
             const posts = await res.json()
             commit('updatePosts', posts)
+            console.log('page :', page);
         }
     },
     mutations: {
@@ -12,7 +13,7 @@ export default {
                 !(newPosts.findIndex(post => post.id === el.id) + 1) ? [...newPosts, el] : newPosts
             ), []);
         },
-        createPosts(state, newPost) {
+        createPost(state, newPost) {
             state.posts = [newPost, ...state.posts];
         },
         updatePost(state, newData) {
@@ -33,9 +34,6 @@ export default {
         },
         getPost: (state) => (id) => {
             return state.posts.find(el => el.id === id);
-        },
-        getCurrentPage(state) {
-            return state.page
         }
     }
 }

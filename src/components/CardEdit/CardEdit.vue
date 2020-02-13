@@ -21,28 +21,28 @@ import { mapMutations } from 'vuex'
             const currentPost = this.$store.getters.getPost(this.$route.params.id)
             return {
                 isEditor: this.$route.name === 'edit',
-                title: !this.isEditor ? currentPost.title : "",
-                description: !this.isEditor? currentPost.description : ""
+                title: !this.isEditor ? currentPost.title : '',
+                description: !this.isEditor? currentPost.description : ''
             }
         },
         methods: {
-            ...mapMutations(['createPosts', 'updatePost']),
+            ...mapMutations(['createPost', 'updatePost']),
             submit() {
-              if (this.isEditor) {
-                this.updatePost({ 
-                    title: this.title, 
-                    description: this.description, 
-                    id: this.$route.params.id,
-                    updatedAt: new Date().toJSON()
-                })
-              } else {
-                this.createPosts({
-                    title: this.title,
-                    description: this.description,
-                    id: Math.random(),
-                    createdAt: new Date().toJSON()
-                })
-              }
+                if (this.isEditor) {
+                    this.updatePost({ 
+                        title: this.title, 
+                        description: this.description, 
+                        id: this.$route.params.id,
+                        updatedAt: new Date().toJSON()
+                    })
+                } else {
+                    this.createPost({
+                        title: this.title,
+                        description: this.description,
+                        id: Math.random(),
+                        createdAt: new Date().toJSON()
+                    })
+                }
                 this.$router.push('/')
             }
         },

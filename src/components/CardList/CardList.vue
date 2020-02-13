@@ -15,7 +15,7 @@
                 :total="allPosts.length"
                 :per-page= 10
                 :current.sync="currentPage"
-                v-on:change="onChangePage(currentPage)"
+                v-on:change="onChangePage"
             >
             </b-pagination>
         </div>
@@ -39,11 +39,11 @@
         },
         methods: {
             ...mapActions(['fetchPosts']),
-            ...mapMutations(['createPosts', 'deletePost']),
+            ...mapMutations(['deletePost']),
             onChangePage(page) {
                 this.fetchPosts(page)
                 window.scrollTo(0, 0)
-                console.log('this.currentPage :', this.currentPage);
+                console.log('this.currentPage :', page);
             }
         },
         mounted() {

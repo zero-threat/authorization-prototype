@@ -18,7 +18,8 @@
                             </b-field>
                             <b-field
                                 label="Пароль"
-                                v-if="password != '123456'"
+                                :type="password == '123456' ? 'is-success' : 'password'"
+                                :message="password == '123456' ? 'Правильно!' : null"
                             >
                                 <b-input
                                     type="password"
@@ -28,20 +29,8 @@
                                 >
                                 </b-input>
                             </b-field>
-                            <b-field
-                                message="Правильно!"
-                                label="Пароль"
-                                type="is-success"
-                                v-else
-                            >
-                                <b-input
-                                    placeholder="Введите пароль"
-                                    password-reveal
-                                    v-model="password"
-                                >
-                                </b-input>
-                            </b-field> 
                             <b-button
+                                :disabled="password != '123456'"
                                 @click.prevent="submit"
                             >
                                 Войти
@@ -69,12 +58,10 @@
         methods: {
             ...mapActions(['fetchUser']),
             submit() {
-              console.log('123', 123)
                 this.fetchUser({
                   login: this.login,
                   password: +this.password,
                 }).then(() => {
-                  console.log('this.getLoginStatus', this.getLoginStatus)
                   this.getLoginStatus ? this.$router.push('/') : this.isLoginError = true
                 })
             }
