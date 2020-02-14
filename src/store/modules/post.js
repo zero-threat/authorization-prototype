@@ -25,8 +25,7 @@ export default {
         }
     },
     state: {
-        posts: [],
-        paginatedPosts: []
+        posts: []
     },
     getters: {
         allPosts(state) {
