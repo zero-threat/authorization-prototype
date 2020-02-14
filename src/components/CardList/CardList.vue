@@ -1,10 +1,10 @@
 <template>
     <div class="home-page">
         <div class="container sized">
-            <Card v-for="(post) in allPosts" :key="post.id" :post="post" v-on:delete="deletePost"/>
+            <Card v-for="(post) in collection" :key="post.id" :post="post" v-on:delete="deletePost"/>
         </div>
         <b-button
-            v-if="getRole == 'writer'"
+            v-if="getRole == 'writer' && currentPage == 1"
             tag="router-link"
             :to="{ name: 'create', params: { id: Math.random() } }"
             type="is-info"
@@ -15,7 +15,7 @@
                 :total="allPosts.length"
                 :per-page= 10
                 :current.sync="currentPage"
-                v-on:change="onChangePage"
+                v-on:change="setPage"
             >
             </b-pagination>
         </div>
@@ -30,20 +30,39 @@
     export default {
         data() {
             return {
-                currentPage: 1
+                currentPage: 1,
+                pagination: {
+                    startIndex: 0,
+                    endIndex: 9
+                }
             }
         },
         components: { Card },
         computed: {
             ...mapGetters(['allPosts', 'getRole']),
+            collection() {
+                return this.paginate(this.allPosts);
+            }
         },
         methods: {
             ...mapActions(['fetchPosts']),
             ...mapMutations(['deletePost']),
-            onChangePage(page) {
-                this.fetchPosts(page)
+            setPage(page) {
+                this.pagination = this.paginator(this.allPosts.length, page)
                 window.scrollTo(0, 0)
-                console.log('this.currentPage :', page);
+            },
+            paginate(data) {
+                return data.slice(this.pagination.startIndex, this.pagination.endIndex + 1)
+            },
+            paginator(totalItems, currentPage) {
+                const startIndex = (currentPage - 1) * 10
+                const endIndex = Math.min(startIndex + 10 - 1, totalItems - 1);
+
+                return {
+                    currentPage: currentPage,
+                    startIndex: startIndex,
+                    endIndex: endIndex,
+                }
             }
         },
         mounted() {

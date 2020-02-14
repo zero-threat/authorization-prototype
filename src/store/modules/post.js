@@ -1,10 +1,9 @@
 export default {
     actions: {
-        async fetchPosts({ commit }, page = 1) {
-            const res = await fetch(`http://localhost:3000/posts?_page=${page}&_limit=10`)
+        async fetchPosts({ commit }) {
+            const res = await fetch(`http://localhost:3000/posts?_limit=10`)
             const posts = await res.json()
             commit('updatePosts', posts)
-            console.log('page :', page);
         }
     },
     mutations: {
@@ -26,7 +25,8 @@ export default {
         }
     },
     state: {
-        posts: []
+        posts: [],
+        paginatedPosts: []
     },
     getters: {
         allPosts(state) {
